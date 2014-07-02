@@ -6,13 +6,15 @@ def parChecker(symbolString):
  	index = True
  	while index<len(symbolString) and balanced:
  		symbol=symbolString[index]
- 		if symbol=='(':
+ 		if symbol in'([{':
  			s.push(symbol)
  		else:
  			if s.isEmpty():
  				balanced= False
  			else: 
- 				s.pop()
+ 				top=s.pop()
+ 				if not matches(top,symbol):
+ 					balanced= False
 
  		index = index+1
 
@@ -20,5 +22,15 @@ def parChecker(symbolString):
  		return True
  	else:
  		return False
+def matches (open, close):
+ 	opens = '([{'
+ 	closers = ')]}'
+	return opens.index(open)==closers.index(close)
+
+ 	
+	
+
+ 
+
 print(parChecker('((()))'))
 print(parChecker('(()'))
